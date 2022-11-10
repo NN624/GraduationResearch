@@ -1,8 +1,15 @@
+'''
+ README
+
+ * マイクの入力をそのまま出力するだけのプログラム
+'''
+
 import pyaudio
 import time
+import numpy as np
 
-# from pydub import AudioSegment
-# from pydub.playback import play
+from pydub import AudioSegment
+from pydub.playback import play
 
 class AudioFilter():
     def __init__(self):
@@ -21,8 +28,15 @@ class AudioFilter():
 
     # コールバック関数（再生が必要なときに呼び出される）
     def callback(self, in_data, frame_count, time_info, status):
-        # out_data = in_data.invert_phase()
-        out_data = in_data
+        # out_data = in_data
+        # print(np.fromstring(in_data, dtype="int16"))
+
+        # in_dataをndarrayに変換
+        in_data = np.fromstring(in_data, dtype="int16")
+        # in_dataの符号を逆にする
+        in_data = -in_data
+        # ndarrayをバイナリに変換
+        out_data = in_data.astype(np.int16).tostring()
         return (out_data, pyaudio.paContinue)
 
     def close(self):
