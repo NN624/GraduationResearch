@@ -17,14 +17,16 @@ frame_shift = 80
 class PlotWindow:
     def __init__(self):
 
-        self.win = pg.GraphicsWindow()
+        self.win = pg.GraphicsLayoutWidget(show=True)
         self.win.setWindowTitle(u"波形のリアルタイムプロット")
         self.win.resize(1100, 800)
         self.plt = self.win.addPlot()  # プロットのビジュアル関係
         self.ymin = -100
         self.ymax = 80
         self.plt.setYRange(-1.0, 1.0)  # y軸の上限、下限の設定
-        self.curve = self.plt.plot()  # プロットデータを入れる場所
+        self.curve = self.plt.plot(pen='b')  # プロットデータを入れる場所
+        self.curve2 = self.plt.plot(pen='r')  # プロットデータを入れる場所
+        self.curve3 = self.plt.plot()
 
         # マイク設定
         self.CHUNK = frame_length  # 1度に読み取る音声のデータ幅
@@ -45,13 +47,29 @@ class PlotWindow:
         self.data = np.zeros(self.CHUNK)
 
     def update(self):
-        self.data = self.AudioInput()
-        self.curve.setData(self.data)
+        # self.data = self.AudioInput()
+        self.sound = np.frombuffer(self.stream.read(self.CHUNK), dtype="int16") / 32768
+        # print(self.data)
+        # file = open("output.json", "w")
+        # file.write(str(self.data))
+        # file.close()
+        # print(type(self.data))
+        
+        self.sound_inverted = self.sound * -1
+        self.stream.write(self.sound.astype(np.int16).tobytes(), self.CHUNK)
+        # self.stream.write(self.sound_inverted.astype(np.int16).tobytes(), self.CHUNK)
+        self.curve.setData(self.sound)
+        self.curve2.setData(self.sound_inverted)
+        self.curve3.setData(self.sound + self.sound_inverted)
 
-    def AudioInput(self):
-        ret = self.stream.read(self.CHUNK)
-        ret = np.frombuffer(ret, dtype="int16") / 32768
-        return ret
+
+    # def AudioInput(self):
+    #     ret = self.stream.read(self.CHUNK)
+    #     self.stream.write(ret)
+    #     ret = np.frombuffer(ret, dtype="int16") / 32768
+    #     return ret
+
+
 
 
 if __name__ == "__main__":
