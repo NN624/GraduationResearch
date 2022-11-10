@@ -8,6 +8,7 @@ import pyqtgraph as pg
 from pyqtgraph.Qt import QtCore, QtGui
 
 import pyaudio
+import wave
 
 sample_rate = 16000
 frame_length = 1024
@@ -28,16 +29,29 @@ class PlotWindow:
         self.curve2 = self.plt.plot(pen='r')  # プロットデータを入れる場所
         self.curve3 = self.plt.plot()
 
+        # 音楽ファイル
+        self.wf = wave.open("cat.wav", "rb")
+        self.p = pyaudio.PyAudio()
+        self.CHUNK = 1024  # 1度に読み取る音声のデータ幅
+        self.stream = self.p.open(
+            format=self.p.get_format_from_width(self.wf.getsampwidth()),
+            channels=self.wf.getnchannels(),
+            rate=self.wf.getframerate(),
+            output=True
+)
+
+
+
         # マイク設定
-        self.CHUNK = frame_length  # 1度に読み取る音声のデータ幅
-        self.RATE = sample_rate  # サンプリング周波数
-        self.audio = pyaudio.PyAudio()
-        self.stream = self.audio.open(format=pyaudio.paInt16,
-                                      channels=1,
-                                      rate=self.RATE,
-                                      input=True,
-                                      output=True,
-                                      frames_per_buffer=self.CHUNK)
+        # self.CHUNK = frame_length  # 1度に読み取る音声のデータ幅
+        # self.RATE = sample_rate  # サンプリング周波数
+        # self.audio = pyaudio.PyAudio()
+        # self.stream = self.audio.open(format=pyaudio.paInt16,
+        #                               channels=1,
+        #                               rate=self.RATE,
+        #                               input=True,
+        #                               output=True,
+        #                               frames_per_buffer=self.CHUNK)
 
         # アップデート時間設定
         self.timer = QtCore.QTimer()
@@ -48,7 +62,10 @@ class PlotWindow:
 
     def update(self):
         # self.data = self.AudioInput()
-        self.sound = np.frombuffer(self.stream.read(self.CHUNK), dtype="int16") / 32768
+        # self.sound = np.frombuffer(self.stream.read(self.CHUNK), dtype="int16") / 32768
+        self.sound = self.wf.readframes(self.CHUNK)
+        self.sound = np.frombuffer(self.sound, dtype="int16")
+        print(type(self.sound))
         # print(self.data)
         # file = open("output.json", "w")
         # file.write(str(self.data))
@@ -56,11 +73,16 @@ class PlotWindow:
         # print(type(self.data))
         
         self.sound_inverted = self.sound * -1
-        self.stream.write(self.sound.astype(np.int16).tobytes(), self.CHUNK)
-        # self.stream.write(self.sound_inverted.astype(np.int16).tobytes(), self.CHUNK)
+        # # self.stream.write(self.sound.astype(np.int16).tobytes(), self.CHUNK)
+        # self.stream.write(self.sound)
+        # # self.stream.write(self.sound_inverted.astype(np.int16).tobytes(), self.CHUNK)
         self.curve.setData(self.sound)
         self.curve2.setData(self.sound_inverted)
         self.curve3.setData(self.sound + self.sound_inverted)
+
+        # self.stream.write(self.sound)
+        # self.stream.write(self.sound_inverted)
+        # self.stream.write(self.sound + self.sound_inverted)
 
 
     # def AudioInput(self):
@@ -77,3 +99,7 @@ if __name__ == "__main__":
 
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
         QtGui.QApplication.instance().exec_()
+
+    plotwin.stream.stop_stream()
+    plotwin.stream.close()
+    plotwin.p.terminate()
