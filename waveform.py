@@ -48,19 +48,42 @@ class PlotWindow:
 
     def update(self):
         # self.data = self.AudioInput()
-        self.sound = np.frombuffer(self.stream.read(self.CHUNK), dtype="int16") / 32768
+        # self.sound = self.data
+        # self.stream.write(self.data)
+        # self.sound = np.frombuffer(self.data, dtype=np.int16)
+        # self.sound = self.sound * -1
+        # self.sound = np.zeros((1, self.CHUNK))
+        # self.sound[0] = np.frombuffer(self.data, dtype=np.int16)
+        # self.sound = np.reshape(self.sound.T, (self.CHUNK * 1))
+        # self.sound = self.sound.astype(np.int16).tostring()
+
+        # self.stream.write(self.sound)
+        # self.stream.write(self.sound.astype(np.int16).tobytes() * 32768)
+        # self.sound = np.frombuffer(self.stream.read(self.CHUNK), dtype="int16") / 32768
         # print(self.data)
         # file = open("output.json", "w")
         # file.write(str(self.data))
         # file.close()
         # print(type(self.data))
         
-        self.sound_inverted = self.sound * -1
-        self.stream.write(self.sound.astype(np.int16).tobytes(), self.CHUNK)
+        # self.sound_inverted = self.sound * -1
+        # self.stream.write(self.sound.astype(np.int16).tobytes(), self.CHUNK)
         # self.stream.write(self.sound_inverted.astype(np.int16).tobytes(), self.CHUNK)
-        self.curve.setData(self.sound)
-        self.curve2.setData(self.sound_inverted)
-        self.curve3.setData(self.sound + self.sound_inverted)
+        # マイクのデータを取得
+        self.data = self.stream.read(self.CHUNK)
+        self.sound = self.data
+        # 音データを逆にした
+        self.sound_inverted = self.sound * -1
+        # 音データを合成した
+        self.combined = self.sound + self.sound_inverted
+        # 音の出力
+        self.stream.write(self.sound)
+        self.stream.write(self.sound_inverted)
+        self.stream.write(self.combined)
+        # 波形のデータをセット
+        self.curve.setData(np.frombuffer(self.sound, dtype=np.int16)/32768)
+        self.curve2.setData(np.frombuffer(self.sound_inverted, dtype=np.int16)/32768)
+        self.curve3.setData(np.frombuffer(self.combined, dtype=np.int16)/32768)
 
 
     # def AudioInput(self):
@@ -68,8 +91,6 @@ class PlotWindow:
     #     self.stream.write(ret)
     #     ret = np.frombuffer(ret, dtype="int16") / 32768
     #     return ret
-
-
 
 
 if __name__ == "__main__":
