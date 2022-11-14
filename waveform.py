@@ -12,6 +12,7 @@ import pyaudio
 sample_rate = 16000
 frame_length = 1024
 frame_shift = 80
+gl_sound, gl_inverted, gl_combined = 0, 0, 0
 
 
 class PlotWindow:
@@ -29,6 +30,17 @@ class PlotWindow:
         self.curve3 = self.plt.plot()
 
         # マイク設定
+        # def init_pyaudio 用
+        # self.stream = self.init_pyaudio
+        # self.RATE = sample_rate
+        # self.audio = pyaudio.PyAudio()
+        # self.stream = self.audio.open(format=pyaudio.paInt16,
+        #                               channels=1,
+        #                               rate=sample_rate,
+        #                               input=True,
+        #                               output=True,
+        #                               frames_per_buffer=frame_length)
+        
         self.CHUNK = frame_length  # 1度に読み取る音声のデータ幅
         self.RATE = sample_rate  # サンプリング周波数
         self.audio = pyaudio.PyAudio()
@@ -45,6 +57,15 @@ class PlotWindow:
         self.timer.start(5) 
 
         self.data = np.zeros(self.CHUNK)
+
+    # def init_pyaudio(self):
+    #     audio = pyaudio.PyAudio()
+    #     return audio.open(format=pyaudio.paInt16,
+    #                             channels=1,
+    #                             rate=sample_rate,
+    #                             input=True,
+    #                             output=True,
+    #                             frames_per_buffer=frame_length)
 
     def update(self):
         # self.data = self.AudioInput()
@@ -73,17 +94,21 @@ class PlotWindow:
         self.data = self.stream.read(self.CHUNK)
         self.sound = self.data
         # 音データを逆にした
-        self.sound_inverted = self.sound * -1
+        self.sound_ndarry = np.frombuffer(self.sound, dtype=np.int16)
+        self.sound_inverted_ndarry = self.sound_ndarry * -1
+        self.sound_inverted = self.sound_inverted_ndarry.astype(np.int16).tobytes()
+        # self.sound_inverted = self.sound * -1
         # 音データを合成した
-        self.combined = self.sound + self.sound_inverted
+        self.combined = (self.sound_ndarry + self.sound_inverted_ndarry)
+        self.combined = self.combined.astype(np.int16).tobytes()
         # 音の出力
         self.stream.write(self.sound)
         self.stream.write(self.sound_inverted)
-        self.stream.write(self.combined)
+        # self.stream.write(self.combined)
         # 波形のデータをセット
         self.curve.setData(np.frombuffer(self.sound, dtype=np.int16)/32768)
         self.curve2.setData(np.frombuffer(self.sound_inverted, dtype=np.int16)/32768)
-        self.curve3.setData(np.frombuffer(self.combined, dtype=np.int16)/32768)
+        # self.curve3.setData(np.frombuffer(self.combined, dtype=np.int16)/32768)
 
 
     # def AudioInput(self):
