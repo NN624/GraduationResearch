@@ -1,3 +1,13 @@
+'''
+README
+
+# run
+python record_sound.py
+
+# URL
+[pythonでできるだけ精度の良いキャプチャーソフトを作ってみる（1）](https://qiita.com/ssdsad/items/b2119260d732bb189c87)
+'''
+
 import pyaudio  #録音機能を使うためのライブラリ
 import wave     #wavファイルを扱うためのライブラリ
  
