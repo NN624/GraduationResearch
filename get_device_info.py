@@ -1,3 +1,10 @@
+'''
+run
+python get_device_info.py
+or
+python get_device_info.py > device_info.txt
+'''
+
 import pyaudio
 
 # 文字化け対処法
