@@ -2,7 +2,7 @@
 * buttonを押すと音量がプログラム内で指定した大きさになる。
 
 # Environment
-* VisualStudi2022
+* VisualStudio2022
 
 # URL
 * [PCのシステムボリュームの情報を参照可能なC#アプリケーションを作成する - MRが楽しい](https://bluebirdofoz.hatenablog.com/entry/2021/12/04/235553)
