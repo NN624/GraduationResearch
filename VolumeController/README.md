@@ -1,12 +1,18 @@
-# ŠT—v
-* button‚ğ‰Ÿ‚·‚Æ‰¹—Ê‚ªƒvƒƒOƒ‰ƒ€“à‚Åw’è‚µ‚½‘å‚«‚³‚É‚È‚éB
+# Summary
+* buttonã‚’æŠ¼ã™ã¨éŸ³é‡ãŒãƒ—ãƒ­ã‚°ãƒ©ãƒ å†…ã§æŒ‡å®šã—ãŸå¤§ãã•ã«ãªã‚‹ã€‚
+
+# Environment
+* VisualStudi2022
 
 # URL
-* [PC‚ÌƒVƒXƒeƒ€ƒ{ƒŠƒ…[ƒ€‚Ìî•ñ‚ğQÆ‰Â”\‚ÈC#ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğì¬‚·‚é - MR‚ªŠy‚µ‚¢](https://bluebirdofoz.hatenablog.com/entry/2021/12/04/235553)
-* [C#‚©‚çWindowsã‚Ìƒ{ƒŠƒ…[ƒ€‚Æ‹P“x‚ğ•ÏX‚·‚é•û–@ - DJ lemon-Sour's diary (prod.hisasann)](https://hisasann.github.io/2017/07/30/how-to-adjust-volume-and-brightness-on-windows/)
+* [PCã®ã‚·ã‚¹ãƒ†ãƒ ãƒœãƒªãƒ¥ãƒ¼ãƒ ã®æƒ…å ±ã‚’å‚ç…§å¯èƒ½ãªC#ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ä½œæˆã™ã‚‹ - MRãŒæ¥½ã—ã„](https://bluebirdofoz.hatenablog.com/entry/2021/12/04/235553)
+* [C#ã‹ã‚‰Windowsä¸Šã®ãƒœãƒªãƒ¥ãƒ¼ãƒ ã¨è¼åº¦ã‚’å¤‰æ›´ã™ã‚‹æ–¹æ³• - DJ lemon-Sour's diary (prod.hisasann)](https://hisasann.github.io/2017/07/30/how-to-adjust-volume-and-brightness-on-windows/)
 
-# •K—v‚ÈƒpƒbƒP[ƒW‚ÌƒCƒ“ƒXƒg[ƒ‹•û–@
-1. ƒc[ƒ‹
-2. NuGetƒpƒbƒP[ƒWƒ}ƒl[ƒWƒƒ[
-3. ƒ\ƒŠƒ…[ƒVƒ‡ƒ“‚ÌNuGetƒpƒbƒP[ƒW‚ÌŠÇ—
-4. QÆƒ^ƒu‚Åunaudiov‚ğŒŸõ‚µuNAudiov‚ğƒCƒ“ƒXƒg[ƒ‹
+# Install
+* NAudio
+
+# How to install package
+1. ãƒ„ãƒ¼ãƒ«
+2. NuGetãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+3. ã‚½ãƒªãƒ¥ãƒ¼ã‚·ãƒ§ãƒ³ã®NuGetãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®ç®¡ç†
+4. å‚ç…§ã‚¿ãƒ–ã§ã€Œnaudioã€ã‚’æ¤œç´¢ã—ã€ŒNAudioã€ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
