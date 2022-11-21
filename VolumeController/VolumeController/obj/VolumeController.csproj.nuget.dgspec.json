@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\VolumeController.csproj": {}
+    "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\VolumeController.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\VolumeController.csproj": {
+    "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\VolumeController.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\VolumeController.csproj",
+        "projectUniqueName": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\VolumeController.csproj",
         "projectName": "VolumeController",
-        "projectPath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\VolumeController.csproj",
+        "projectPath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\VolumeController.csproj",
         "packagesPath": "C:\\Users\\s192034.TSITCL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\obj\\",
+        "outputPath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

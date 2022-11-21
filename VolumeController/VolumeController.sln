@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumeController", "VolumeController\VolumeController.csproj", "{AD71EDBA-61BC-4A3E-87D1-9543BF8218AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumeController", "VolumeController\VolumeController.csproj", "{8F557EF1-B8FE-481E-9121-1E95464F5E52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD71EDBA-61BC-4A3E-87D1-9543BF8218AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD71EDBA-61BC-4A3E-87D1-9543BF8218AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD71EDBA-61BC-4A3E-87D1-9543BF8218AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD71EDBA-61BC-4A3E-87D1-9543BF8218AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F557EF1-B8FE-481E-9121-1E95464F5E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F557EF1-B8FE-481E-9121-1E95464F5E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F557EF1-B8FE-481E-9121-1E95464F5E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F557EF1-B8FE-481E-9121-1E95464F5E52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CF8DDD14-7A88-4E20-BBBB-81F2B9CF6DAE}
+		SolutionGuid = {DE234023-829B-4AC3-B268-EB2B5E189265}
 	EndGlobalSection
 EndGlobal

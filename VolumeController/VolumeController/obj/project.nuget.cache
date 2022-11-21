@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GzRnWbQztxMGh8jIWah1mpZ6f/lwZCMbSo/wU9GotZvz9fdT5C0kLO2xSZXjQH9BHRPalavu1bs4s5y70oyurQ==",
+  "dgSpecHash": "ecFTuoGEHkop5QQeKq07Ah1xpRMJ8k9GbdRPdRCJJWyXa1ByNR7UFfbQLA3ne3ZMRFCMaBnUsQwu6uFub80e9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\PyAudio\\VolumeController\\VolumeController\\VolumeController.csproj",
+  "projectFilePath": "C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\VolumeController.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s192034.TSITCL\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\s192034.TSITCL\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
