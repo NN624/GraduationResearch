@@ -41,7 +41,7 @@ namespace VolumeController
                 Debug.WriteLine(progressBar1.Value * volume);
 
                 // ‰¹—Ê‚ð§ŒÀ
-                if (progressBar1.Value * volume > 2000)
+                if ((progressBar1.Value * volume) > (trackBar2.Value * 100))
                 {
                     label2.Text = System.Convert.ToString(vc.SetVolume(volume - 10));
                     trackBar1.Value = volume;
@@ -53,6 +53,11 @@ namespace VolumeController
         {
             vc.SetVolume(trackBar1.Value);
             label2.Text = System.Convert.ToString(vc.SetVolume(trackBar1.Value));
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            label4.Text = System.Convert.ToString(trackBar2.Value);
         }
     }
 
