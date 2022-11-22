@@ -33,8 +33,6 @@ namespace VolumeController
                 // パーの値を変更
                 var device = (MMDevice)comboBox1.SelectedItem;
                 progressBar1.Value = (int)(Math.Round(device.AudioMeterInformation.MasterPeakValue * 100));
-                // Debug.WriteLine(device.AudioMeterInformation.MasterPeakValue);
-                // Debug.WriteLine(progressBar1.Value);
 
                 // 音量を取得
                 var volume = vc.GetVolume();
@@ -43,7 +41,8 @@ namespace VolumeController
                 // 音量を制限
                 if ((progressBar1.Value * volume) > (trackBar2.Value * 100))
                 {
-                    label2.Text = System.Convert.ToString(vc.SetVolume(volume - 10));
+                    // volumeの大きさによって下げる音量の幅を変更する
+                    label2.Text = System.Convert.ToString(vc.SetVolume(volume - (int)Math.Ceiling((double)volume / 10.0d)));
                     trackBar1.Value = volume;
                 }
             }
@@ -77,6 +76,13 @@ namespace VolumeController
         public int SetVolume(int volume)
         {
             // 音量を変更（範囲：0.0～1.0）
+            /*
+            if (volume < 0)
+            {
+                volume = 0;
+            }
+            */
+            volume = volume < 0 ? 0 : volume;
             device.AudioEndpointVolume.MasterVolumeLevelScalar = ((float)volume / 100.0f);
             return GetVolume();
         }
