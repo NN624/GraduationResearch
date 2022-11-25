@@ -46,9 +46,11 @@
             this.min_volume = new System.Windows.Forms.Label();
             this.min_trackBar = new System.Windows.Forms.TrackBar();
             this.min_btn = new System.Windows.Forms.Button();
+            this.sum_trackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.volume_trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.max_trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_trackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sum_trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -185,7 +187,7 @@
             // 
             // min_trackBar
             // 
-            this.min_trackBar.Location = new System.Drawing.Point(170, 149);
+            this.min_trackBar.Location = new System.Drawing.Point(170, 133);
             this.min_trackBar.Maximum = 100;
             this.min_trackBar.Name = "min_trackBar";
             this.min_trackBar.Size = new System.Drawing.Size(333, 56);
@@ -202,11 +204,20 @@
             this.min_btn.UseVisualStyleBackColor = true;
             this.min_btn.Click += new System.EventHandler(this.min_btn_Click);
             // 
+            // sum_trackBar
+            // 
+            this.sum_trackBar.Location = new System.Drawing.Point(170, 195);
+            this.sum_trackBar.Maximum = 100;
+            this.sum_trackBar.Name = "sum_trackBar";
+            this.sum_trackBar.Size = new System.Drawing.Size(333, 56);
+            this.sum_trackBar.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 397);
+            this.Controls.Add(this.sum_trackBar);
             this.Controls.Add(this.min_btn);
             this.Controls.Add(this.min_trackBar);
             this.Controls.Add(this.min_volume);
@@ -228,6 +239,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.volume_trackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.max_trackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_trackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sum_trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,5 +263,6 @@
         private Label min_volume;
         private TrackBar min_trackBar;
         private Button min_btn;
+        private TrackBar sum_trackBar;
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Timers;
 
 namespace VolumeController
 {
@@ -17,6 +18,8 @@ namespace VolumeController
     {
 
         //private VolumeController vc = new VolumeController();
+        private static System.Timers.Timer aTimer;
+        public static bool enable_timer = false;
 
         MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
         public MMDevice device;
@@ -24,7 +27,8 @@ namespace VolumeController
 
         // サンプル再生用の準備
         WaveOutEvent waveOut = new WaveOutEvent();
-        AudioFileReader afr = new AudioFileReader("C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\400hz-6db-20sec.wav");
+        AudioFileReader afr = new AudioFileReader("C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\400hz-9db-20sec.wav");
+        //AudioFileReader afr = new AudioFileReader("C:\\Users\\s192034.TSITCL\\OneDrive - Cyber University\\School\\卒業研究\\GraduationResearch\\VolumeController\\VolumeController\\5khz-6db-20sec.wav");
 
         public Form1()
         {
@@ -52,31 +56,38 @@ namespace VolumeController
                 // 音量を取得
                 var volume = GetVolume();
                 // Debug.WriteLine(progressBar1.Value * volume);
-                Debug.WriteLine(progressBar1.Value + volume);
+                //Debug.WriteLine(progressBar1.Value + volume);
+                //sum_trackBar.Value = (int)((GetVolume()/100.0d) * (progressBar1.Value / 100.0d));
+                sum_trackBar.Value = (int)(GetVolume() * progressBar1.Value / 100);
+                //max_trackBar.Value = (int)((GetVolume() / 100.0d) * (progressBar1.Value / 100.0d) * 100);
+                //Debug.WriteLine(sum_trackBar.Value);
 
                 // 最大の音量を制限
-                if ((progressBar1.Value * volume) > (max_trackBar.Value * 100))
+                if ((sum_trackBar.Value > max_trackBar.Value))
                 {
                     // volumeの大きさによって下げる音量の幅を変更する
-                    SetVolume(volume - (int)Math.Ceiling((double)volume / 10.0d));
+                    //SetVolume(volume - (int)Math.Ceiling((double)volume / 10.0d));
+                    SetVolume(volume - 1);
                     volume_trackBar.Value = volume;
                 }
 
                 // 最小の音量を制限
-                if ((progressBar1.Value * volume) < (min_trackBar.Value * volume))
+                if ((progressBar1.Value * volume) / 100.0d < (min_trackBar.Value) && enable_timer == false)
                 {
                     // volumeの大きさによって下げる音量の幅を変更する
-                    SetVolume(volume + (int)Math.Ceiling((double)volume / 10.0d));
+                    //SetVolume(volume + (int)Math.Ceiling((double)volume / 10.0d));
+                    SetVolume(volume - 1);
                     volume_trackBar.Value = volume;
+                    //SetTimer();
+                    /*
+                    問題！！！下げ、上げが連続で入力されるのをなんとかしたい！
+                    これは、根本的な考え方の問題かな？？？？？？？
+                     */
                 }
+                
 
                 // サンプル音源のループ
                 afr.Position = 0;
-                /*
-                 ループが出来ているかを20秒の音源でテストする！！！！！
-                これが出来たら完成かな～
-                音の最大値をへんこう
-                 */
             }
         }
 
@@ -113,15 +124,37 @@ namespace VolumeController
         private void max_btn_Click(object sender, EventArgs e)
         {
             //max_trackBar.Value = (int)Math.Floor((double)(GetVolume() * (progressBar1.Value / 100)) * 100.0d);
-            max_trackBar.Value = (int)(GetVolume() * (progressBar1.Value / 100.0d)) * 100;
-            max_volume.Text = System.Convert.ToString(max_trackBar.Value) + "%";
+            max_trackBar.Value = (int)(GetVolume() * progressBar1.Value / 100);
+            max_volume.Text = System.Convert.ToString(max_trackBar.Value);
         }
 
         private void min_btn_Click(object sender, EventArgs e)
         {
             //min_trackBar.Value = (int)Math.Floor((double)(GetVolume() * progressBar1.Value) / 100.0d);
-            min_trackBar.Value = (int)(GetVolume() * (progressBar1.Value / 100.0d)) * 100;
-            min_volume.Text = System.Convert.ToString(min_trackBar.Value * 100) + "%";
+            //min_trackBar.Value = (int)(GetVolume() * (progressBar1.Value / 100.0d)) * 100;
+            //min_trackBar.Value = (int)((GetVolume() / 100.0d) * (progressBar1.Value / 100.0d) * 100);
+            min_trackBar.Value = (int)(GetVolume() * progressBar1.Value / 100);
+            min_volume.Text = System.Convert.ToString(min_trackBar.Value);
+        }
+
+        // 音量の短時間連続上昇を防ぐ
+        private static void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            // １秒
+            aTimer = new System.Timers.Timer(3000);
+            Debug.WriteLine("start");
+            // Hook up the Elapsed event for the timer.
+            enable_timer = true;
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = false;
+            aTimer.Enabled = true;
+
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            enable_timer = false;
+            Debug.WriteLine("stop");
         }
 
         /*
@@ -136,7 +169,13 @@ namespace VolumeController
         public int SetVolume(int volume)
         {
             // 音量を変更（範囲：0.0～1.0）
-            volume = volume < 0 ? 0 : volume;
+            if (volume < 0)
+            {
+                volume = 0;
+            }else if (volume > 100)
+            {
+                volume = 100;
+            }
             device.AudioEndpointVolume.MasterVolumeLevelScalar = ((float)volume / 100.0f);
             volume_trackBar.Value = volume;
             label2.Text = System.Convert.ToString(volume);
@@ -148,7 +187,7 @@ namespace VolumeController
         // メソッド：音量の取得 return：0.00～1.00 
         public int GetVolume()
         {
-            return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar);
+            return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
         }
 
         // メソッド：デバイスの一覧を取得
