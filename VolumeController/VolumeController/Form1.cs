@@ -58,12 +58,15 @@ namespace VolumeController
                 // Debug.WriteLine(progressBar1.Value * volume);
                 //Debug.WriteLine(progressBar1.Value + volume);
                 //sum_trackBar.Value = (int)((GetVolume()/100.0d) * (progressBar1.Value / 100.0d));
+                
                 sum_trackBar.Value = (int)(GetVolume() * progressBar1.Value / 100);
+                //sum_trackBar.Value = (int)(GetVolume() + progressBar1.Value / 200 / 2);
+
                 //max_trackBar.Value = (int)((GetVolume() / 100.0d) * (progressBar1.Value / 100.0d) * 100);
                 //Debug.WriteLine(sum_trackBar.Value);
 
                 // 最大の音量を制限
-                if ((sum_trackBar.Value > max_trackBar.Value))
+                if ((sum_trackBar.Value > max_trackBar.Value) && progressBar1.Value != 0)
                 {
                     // volumeの大きさによって下げる音量の幅を変更する
                     //SetVolume(volume - (int)Math.Ceiling((double)volume / 10.0d));
@@ -72,17 +75,24 @@ namespace VolumeController
                 }
 
                 // 最小の音量を制限
-                if ((progressBar1.Value * volume) / 100.0d < (min_trackBar.Value) && enable_timer == false)
+                if ((sum_trackBar.Value) < (min_trackBar.Value) && progressBar1.Value != 0 && enable_timer == false)
                 {
                     // volumeの大きさによって下げる音量の幅を変更する
                     //SetVolume(volume + (int)Math.Ceiling((double)volume / 10.0d));
-                    SetVolume(volume - 1);
+                    SetVolume(volume + 1);
                     volume_trackBar.Value = volume;
-                    //SetTimer();
-                    /*
-                    問題！！！下げ、上げが連続で入力されるのをなんとかしたい！
-                    これは、根本的な考え方の問題かな？？？？？？？
-                     */
+                    //
+                    SetTimer();
+                }
+                if ((progressBar1.Value == 0) && volume_trackBar.Value != 0)
+                {
+                    SetVolume(0);
+
+                }
+
+                if (progressBar1.Value != 0 && volume_trackBar.Value == 0 && max_trackBar.Value != 100)
+                {
+                    SetVolume(max_trackBar.Value);
                 }
                 
 
@@ -142,7 +152,7 @@ namespace VolumeController
         {
             // Create a timer with a two second interval.
             // １秒
-            aTimer = new System.Timers.Timer(3000);
+            aTimer = new System.Timers.Timer(5000);
             Debug.WriteLine("start");
             // Hook up the Elapsed event for the timer.
             enable_timer = true;
